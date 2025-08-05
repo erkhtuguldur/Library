@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
-    <script src="script.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,7 +11,43 @@
         <p>Library</p>
     </div>
     <div class="mainContainer">
+        <dialog id="addScreen">
+            <form>
+                <label>
+                    Title:<input id="bookTitle" type="text" required minlength="1">
+                </label>
+                
+                <label>
+                    Author:
+                    <input id="bookAuthor" type="text" required minlength="1">
+                </label>
+                <label>
+                    Page count:
+                    <input id="bookPageCt" type="number" required min="1">
+                </label>
+
+                <label>
+                    Read:
+                    <input type="checkbox" id="bookRead">
+                </label>
+                </p>
+                <div>
+                <button id="cancel">Cancel</button>
+                <button id="confirmBtn" type="button" value="default">Confirm</button>
+                </div>
+            </form>
+        </dialog>
+        <button id="showDialog">Add a new book</button>
+        </p>
+
+        <div id="cardsContainer">
+            
+        </div>
 
     </div>
+
+
+
+    <script src="script.js"></script>
 </body>
 </html>
