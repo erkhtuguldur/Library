@@ -1,22 +1,24 @@
-const myLibrary=[];
-function Book(title,author,pagenum,id,haveRead){
+function addBookToLibrary(title,author,pagenum,haveRead){
+    let uniqueId=crypto.randomUUID();
+    let book=new Book(title,author,pagenum,uniqueId,haveRead);
+    Book.myLibrary.push(book);
+}
+
+
+class Book{
+  static myLibrary=[];
+  constructor(title,author,pagenum,id,haveRead){
     this.title=title;
     this.author=author;
     this.pagenum=pagenum;
     this.id=id;
     this.haveRead=haveRead;
-}
+  }
 
-function addBookToLibrary(title,author,pagenum,haveRead){
-    let uniqueId=crypto.randomUUID();
-    let book=new Book(title,author,pagenum,uniqueId,haveRead);
-    myLibrary.push(book);
-}
-
-Book.prototype.toggleRead=function (){
+  toggleRead(){
     this.haveRead=!this.haveRead;
+  }
 }
-
 
 const showButton = document.getElementById("showDialog");
 const addScreen = document.getElementById("addScreen");
@@ -45,7 +47,7 @@ document.addEventListener("click", (e) => {
 
 
     const parentId=e.target.parentElement.parentElement.id;
-    for (let book of myLibrary){
+    for (let book of Book.myLibrary){
       if(book.id==parentId){
         book.toggleRead();
       }
@@ -54,10 +56,10 @@ document.addEventListener("click", (e) => {
   else if(e.target.classList.contains("delete")){
     const parent =e.target.parentElement.parentElement;
     const parentId=parent.id;
-      for(let i=0;i<myLibrary.length;i++){
-        if(myLibrary[i].id==parentId){
+      for(let i=0;i<Book.myLibrary.length;i++){
+        if(Book.myLibrary[i].id==parentId){
           parent.remove();
-          myLibrary.splice(i,1);
+          Book.myLibrary.splice(i,1);
         }
       }
   }
@@ -102,7 +104,7 @@ cancelBtn.addEventListener("click",(event) => {
 );
 
 function display(){
-  myLibrary.forEach(createCard);
+  Book.myLibrary.forEach(createCard);
 }
 
 function createCard(book){
